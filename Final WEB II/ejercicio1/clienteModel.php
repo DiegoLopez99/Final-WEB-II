@@ -15,7 +15,7 @@ class clienteModel{
 
     function addCliente($nombre, $dni, $telefono, $direccion, $premiun){
         $sentencia = $this->db->prepare("INSERT INTO cliente(nombre, dni, telefono, direccion, premiun VALUE (?,?,?,?,?)");
-        $sentencia->execute(array($nombre, $dni, $telefono, $direccion, $premiun))
+        $sentencia->execute(array($nombre, $dni, $telefono, $direccion, $premiun));
         return $this->db->lastInsertId();
     }
 
@@ -23,13 +23,11 @@ class clienteModel{
         $clientes = $this->db->getClientes();
         foreach($clientes as $cliente){
             if($cliente->dni == $DNI){
-                $result == true;
+                return true;
+            }else{
+                return false;
             }
         }
-        if(isset($result)){
-            return true;
-        }else{
-            return false;
-        }
+        
     }
 }

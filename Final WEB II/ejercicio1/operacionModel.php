@@ -11,6 +11,6 @@ class operacionModel{
         $monto = 10000;
         $fecha = getDate();
         $sentencia = $this->db->prepare("INSERT INTO operacion(monto, fecha, tipo_operacion, id_cuenta) VALUES (?,?,?,?)");
-        $sentencia->execute($monto, $fecha, 2, $id_cuenta)
+        $sentencia->execute($monto, $fecha, 2, $id_cuenta);
     }
 }

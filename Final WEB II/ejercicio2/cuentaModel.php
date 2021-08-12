@@ -20,16 +20,11 @@ class cuentaModel{
     }
 
     function verificarCuentas($id){
-        $cuentas = $this->getClientes();
+        $cuentas = $this->getCuentas();
         foreach($cuentas as $cuenta){
             if($cuenta->id_cliente = $id){
-                $result = true;
+                return true;
             }
-        }
-        if(isset($result)){
-            return true;
-        }else{
-            return false;
         }
     }
 

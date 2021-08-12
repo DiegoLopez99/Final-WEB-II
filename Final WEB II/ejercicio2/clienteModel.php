@@ -14,16 +14,11 @@ class clienteModel{
     }
 
     function verificarCliente($id){
-        $clienes = $this->getClientes();
+        $clientes = $this->getClientes();
         foreach($clientes as $cliente){
             if($cliente->id = $id){
-                $result = true;
+                return true;
             }
-        }
-        if(isset($result)){
-            return true;
-        }else{
-            return false;
         }
     }
 

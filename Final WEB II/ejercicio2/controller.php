@@ -17,14 +17,16 @@
         function tablaResumen($params = null){
             $id = $params[':ID'];
             $existeCliente = $this->clienteModel->verificarCliente($id);
-            $tieneCuentas = $this->cuentaModel->verificarCuentas($id);
-            $listaCuentas = $this->cuentaModel->cuentasDeCliente($id);
-            foreach($listaCuentas as $cuenta){
-                $operacionesCuenta += $this->operacionesModel->getOperacionesCuenta($cuenta->id);
-            }
-            if($existeCliente == true){
-                if($tieneCuentas){
-                    $this->view->showTabla($listaCuentas, $operacionesCuenta);
+            if(isset($existeCliente) && $existeCliente == true){
+                $tieneCuentas = $this->cuentaModel->verificarCuentas($id);
+                if(isset($tieneCuentas) && $tieneCuentas == true){
+                    $listaCuentas = $this->cuentaModel->cuentasDeCliente($id);
+                    foreach($listaCuentas as $cuenta){
+                        $operacionesCuenta += $this->operacionesModel->getOperacionesCuenta($cuenta->id);
+                        $saldoCuentas += $this->saldoCuenta($cuenta->id);
+                    }
+                    
+                    $this->view->showTabla($listaCuentas, $operacionesCuenta, $saldoCuentas);
                 }else{
                     $this->view->showTabla("El cliente ingresado no tiene cuentas vinculadas");
                 }
@@ -33,4 +35,16 @@
             }
             
         }
-    }    
+
+        function saldoCuenta($id){
+            $operacionesCuenta = $this->operacionesModel->getOperacionesCuenta($id);
+            foreach ($operacionesCuenta as $operacion) {
+                if($operacion->tipo_operacion = 1){
+                    $saldo = $saldo - $operacion->monto;
+                }elseif ($operacion->tipo_operacion = 2) {
+                    $saldo = $saldo + $operacion->monto;
+                }
+            }
+            return $saldo;
+        }
+    }  

@@ -14,7 +14,7 @@ class operacionModel{
     }
 
     function getOperacionesCuenta($id){
-        $sentencia = $this->db->prepare("SELECT * FROM operacione WHERE id_cuenta=?");
+        $sentencia = $this->db->prepare("SELECT * FROM operacion WHERE id_cuenta=?");
         $sentencia->execute($id);
         return $sentencia->fetchAll(PDO::fecth_obj);
     }

@@ -11,7 +11,7 @@
             $this->view = new view;
             $this->clienteModel = new clienteModel;
             $this->cuentaModel = new cuentaModel;
-            $this->opercionModel = new opercionModel;
+            $this->operacionModel = new operacionModel;
         }
 
         function addCliente(){
